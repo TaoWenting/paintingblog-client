@@ -1,0 +1,1 @@
+export { default as commentAdded } from './commentAdded.subscription';

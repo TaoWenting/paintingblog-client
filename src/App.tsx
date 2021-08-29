@@ -1,26 +1,39 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import PaintingListScreen from './components/PaintingListScreen';
+import VideoPlayer from './components/VideoScreen'
+import {
+  BrowserRouter,
+  Route,
+  Redirect,
+  Switch,
+  RouteComponentProps,
+} from 'react-router-dom';
+import PaintingDetailScreen from './components/PaintingDetailScreen';
+import AnimatedSwitch from './components/AnimatedSwitch';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
-}
+
+const App: React.FC = () => (
+
+
+<BrowserRouter>
+    <AnimatedSwitch>
+      <Route exact path="/Player" component={VideoPlayer} />
+      <Route exact path="/paintings" component={PaintingListScreen} />
+      <Route
+        exact
+        path="/paintings/:paintingId"
+        component={({
+          match,
+          history,
+        }: RouteComponentProps<{ paintingId: string }>) => (
+          <PaintingDetailScreen paintingId={match.params.paintingId} history={history} />
+        )}
+      />      
+    </AnimatedSwitch>
+    <Route exact path="/" render={redirectToPaintings} />
+  </BrowserRouter>
+);
+
+const redirectToPaintings = () => <Redirect to="/paintings"/>;
 
 export default App;
