@@ -15,7 +15,7 @@ const VideoPlayer= () => (
     <Container>
     <ReactPlayer
       
-      url='https://www.youtube.com/watch?v=38_LYZknQ10'
+      url='https://youtu.be/XE4A99-HEpE'
       width='100%'
       height='100%'
     />
