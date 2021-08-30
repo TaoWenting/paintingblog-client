@@ -1,0 +1,1 @@
+export { default as paintings } from './paintings.query';
